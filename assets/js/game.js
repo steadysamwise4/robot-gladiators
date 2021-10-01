@@ -20,7 +20,7 @@ var fight = function(enemy) {
      // repeat and execute as long as the enemy-robot is alive
      while(playerInfo.health > 0 && enemy.health > 0) {
     
-    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.")
+    var promptFight = window.prompt("Would you like to FIGHT " + enemy.name + "? or SKIP this battle? Press enter to'FIGHT' or type 'SKIP' to skip.")
 
     // if player picks "skip" confirm and then stop the loop
          if (promptFight === "skip" || promptFight === "SKIP" || promptFight === "Skip") {
@@ -149,29 +149,15 @@ var shop = function() {
             case "Refill":
             case "REFILL": 
             case "refill":
-                if (playerInfo.money >= 7) {
-                    window.alert("Refilling player's health by 20 for 7 Robo Bucks.");
-
-                    // increase health and decrease money
-                    playerInfo.health = playerInfo.health + 20;
-                    playerInfo.money = playerInfo.money - 7;
-                } else {
-                    window.alert("You don't have enough money!");
-                }
-                    break;
+                playerInfo.refillHealth();
+                break;
+                
             case "UPGRADE":
             case "Upgrade":
             case "upgrade":
-                if (playerInfo.money >= 7) {
-                    window.alert("Upgrading player's attack by 6 for 7 Robo Bucks.");
-
-                    // increase attack and decrease money
-                    playerInfo.attack = playerInfo.attack + 6;
-                    playerInfo.money = playerInfo.money - 7;
-                } else {
-                    window.alert("You don't have enough money!");
-                }
-                    break;
+                playerInfo.upgradeAttack();
+                break;
+               
             case "leave":
             case "LEAVE":
             case "Leave":
@@ -200,7 +186,28 @@ var playerInfo = {
         this.health = 180;
         this.money = 25;
         this.attack = 10;
+    },
+    refillHealth: function() {
+        if (this.money >= 7) {
+            window.alert("Refilling player's health by 20 for 7 dollars.");
+            this.health += 20;
+            this.money -= 7;
+        }
+        else {
+            window.alert("You don't have enough money!");
+        }
+    },
+    upgradeAttack: function() {
+        if (this.money >= 7) {
+        window.alert("Upgrading player's attack by 6 for 7 dollars.");
+        this.attack += 6;
+        this.money -= 7;
+        }
+        else {
+            window.alert("You don't have enough money!");
+        }
     }
+
 };
 
 //console.log(playerInfo.name, playerInfo.attack, playerInfo.health);

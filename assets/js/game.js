@@ -89,13 +89,13 @@ var fight = function(enemy) {
 }; */
 var startGame = function() {
 
-    //debugger;
+    
     // reset player stats
     playerInfo.reset();
     for(var i = 0; i < enemyInfo.length; i++) {
         if (playerInfo.health > 0) {
             window.alert("Welcome to Robot Gladiators! Round " + (i + 1) + ". Are you not ENTERTAINED??");
-    
+            //debugger;
         var pickedEnemyObj = enemyInfo[i];
         pickedEnemyObj.health = randomNumber(40, 60);
         // 
@@ -175,13 +175,22 @@ var shop = function() {
         }
         
 };
-
+// funtion to bug/fix the player name input
+var getPlayerName = function() {
+    var name = "";
+    while (name === "" || name === null) {
+        name = prompt("Please provideth your robot's name");
+    }
+    console.log("Your robot's name is " + name);
+    return name;
+};
 // player info object
 var playerInfo = {
-    name:window.prompt("Please provideth your robot's name?"),
+    name: getPlayerName(),
     health: 180,
     attack: 14,
     money: 25,
+
     reset: function() {
         this.health = 180;
         this.money = 25;

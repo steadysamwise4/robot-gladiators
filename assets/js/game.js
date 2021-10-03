@@ -23,9 +23,18 @@ var randomNumber = function(min, max) {
 
 
 var fight = function(enemy) {
-    
+    // keep track of who goes first
+    var isPlayerTurn = true;
+
+    // randomly change turn order
+    if (Math.random() > 0.5) {
+        isPlayerTurn = false;
+    }
+
+
      // repeat and execute as long as the enemy-robot is alive
      while(playerInfo.health > 0 && enemy.health > 0) {
+        if (isPlayerTurn) {
         var promptFight = window.prompt("Would you like to FIGHT " + enemy.name + "? or SKIP this battle? Press enter to'FIGHT' or type 'skip' to skip.");
         promptFight = promptFight.toLowerCase();
     
@@ -47,6 +56,7 @@ var fight = function(enemy) {
         window.alert(enemy.name + " has " + enemy.health + " health points!");
         //Subtract the value of `playerInfo.attack` from the value of `enemy.health` and use that result to update the value in the `enemy.health` variable
         // generate random damage value based on player's attack power
+        
         var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
         enemy.health = Math.max(0, enemy.health - damage);
         // Log a resulting message to the console so we know that it worked.
@@ -66,6 +76,7 @@ var fight = function(enemy) {
         else {
             window.alert(enemy.name + " has taken " + damage + " damage! However, he remains engaged in the fight.");
         }
+        } else {
         // Subtract the value of `enemy.attack` from the value of `playerInfo.health` and use that result to update the value in the `playerInfo.health` variable.
         // generate random damage
         var damage = randomNumber(enemy.attack - 4, enemy.attack);
@@ -83,6 +94,9 @@ var fight = function(enemy) {
         else {
             window.alert(playerInfo.name + " has " + playerInfo.health + " health points remaining.");
         }
+        }
+        // switch turn order for next round
+        isPlayerTurn = !isPlayerTurn;
     }
 }; 
         // if no (false), ask question again by running fight() again
